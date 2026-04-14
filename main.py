@@ -3,7 +3,7 @@ from discord.ext import commands
 import logging
 from dotenv import load_dotenv
 import os
-
+import time
 from flask import Flask
 from threading import Thread
 
@@ -61,4 +61,5 @@ async def on_message(message):
 
 #bot.run(token,log_handler=handler, log_level=logging.DEBUG)
 keep_alive()
+time.sleep(60)
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)

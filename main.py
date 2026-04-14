@@ -21,7 +21,7 @@ def keep_alive():
     t.start()
 
 load_dotenv()
-token = os.getenv('DISCORD_TOKEN')
+#token = os.getenv('DISCORD_TOKEN')
 handler = logging.FileHandler('discord.log','w','utf-8')
 intents = discord.Intents.default()
 intents.message_content = True

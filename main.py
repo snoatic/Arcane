@@ -4,6 +4,22 @@ import logging
 from dotenv import load_dotenv
 import os
 
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run_web():
+    app.run(host='0.0.0.0', port=10000)
+
+def keep_alive():
+    t = Thread(target=run_web)
+    t.start()
+
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
 handler = logging.FileHandler('discord.log','w','utf-8')
@@ -43,4 +59,6 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
-bot.run(token,log_handler=handler, log_level=logging.DEBUG)
+/bot.run(token,log_handler=handler, log_level=logging.DEBUG)
+keep_alive()
+bot.run(token, log_handler=handler, log_level=logging.DEBUG)

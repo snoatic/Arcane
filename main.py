@@ -18,6 +18,7 @@ CENSORED_WORDS = [
     "praneet",
     "pregu"
 ]
+secret_role = "King of GAYS"
 
 @bot.event
 async def on_ready():
@@ -43,4 +44,25 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f"hello {ctx.author.mention}")
+
+@bot.command()
+async def assign(ctx):
+    role = discord.utils.get(ctx.guild.roles, name = secret_role)
+    if role:
+        await ctx.author.add_roles(role)
+        await ctx.send(f"{ctx.author.mention} is now assigned to {secret_role}.")
+    else:
+        await ctx.send("Role does not exist.") 
+
+@bot.command()
+async def remove(ctx):
+    role = discord.utils.get(ctx.guild.roles, name = secret_role)
+    if role:
+        await ctx.author.remove_roles(role)
+        await ctx.send(f"{ctx.author.mention} has had the {secret_role} removed.")
+    else:
+        await ctx.send("Role does not exist.")
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)

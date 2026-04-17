@@ -15,10 +15,11 @@ bot = commands.Bot('!',intents=intents)
 
 # List of censored words
 CENSORED_WORDS = [
-    "praneet",
-    "pregu"
+    "praneet", "suicide",
+    "pregu"  , "blood"  ,
+    "Yuta"   , "gey"    ,
 ]
-secret_role = "King of GAYS"
+secret_role = "Legendary Yapper"
 
 @bot.event
 async def on_ready():

@@ -15,9 +15,9 @@ bot = commands.Bot('!',intents=intents)
 
 # List of censored words
 CENSORED_WORDS = [
-    "praneet", "suicide",
-    "pregu"  , "blood"  ,
-    "Yuta"   , "gey"    ,
+    "suicide",
+    "blood"  ,
+    "gey"    
 ]
 secret_role = "Legendary Yapper"
 

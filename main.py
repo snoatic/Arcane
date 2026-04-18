@@ -14,7 +14,7 @@ intents.members = True
 bot = commands.Bot('!',intents=intents)
 
 # List of censored words
-CENSORED_WORDS = []
+CENSORED_WORDS = ["king","suicide","blood","gey"]
 secret_role = "Legendary Yapper"
 
 @bot.event
@@ -25,22 +25,28 @@ async def on_ready():
 async def on_member_join(member):
     await member.send(f"Welcome to the server {member.name}")
 
+import string
+
 @bot.event
 async def on_message(message):
-    print(f"Message received: {message.author} - {message.content}")  # DEBUG
+    print(f"Message received: {message.author} - {message.content}")
+
     if message.author == bot.user:
-        return 
-    
-    # Check if any censored word is in the message
-    message_lower = message.content.lower()
+        return
+
+    # Convert to lowercase and split into words
+    words = message.content.lower().split()
+
+    # Remove punctuation from each word
+    cleaned_words = [word.strip(string.punctuation) for word in words]
+
     for word in CENSORED_WORDS:
-        if word in message_lower:
+        if word in cleaned_words:
             await message.delete()
             await message.channel.send(f"{message.author.mention} - dont use the word!")
-            break  # Stop checking after first match
-    
-    await bot.process_commands(message)
+            break
 
+    await bot.process_commands(message)
 @bot.command()
 async def hello(ctx):
     await ctx.send(f"hello {ctx.author.mention}")

@@ -14,13 +14,7 @@ intents.members = True
 bot = commands.Bot('!',intents=intents)
 
 # List of censored words
-CENSORED_WORDS = [
-    "suicide",
-    "blood"  ,
-    "gey"    ,
-    "King"   ,
-    "king"
-]
+CENSORED_WORDS = []
 secret_role = "Legendary Yapper"
 
 @bot.event

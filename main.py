@@ -14,7 +14,9 @@ intents.members = True
 bot = commands.Bot('!',intents=intents)
 
 # List of censored words
-CENSORED_WORDS = []
+ALLOWED_GUILDS = [1475164149511356617,]
+
+CENSORED_WORDS = ["king","pregneet","Praneet","Pregu",]
 secret_role = "Legendary Yapper"
 
 @bot.event
@@ -33,7 +35,9 @@ async def on_message(message):
 
     if message.author == bot.user:
         return
-
+    if not message.guild or message.guild.id not in ALLOWED_GUILDS:
+        await bot.process_commands(message)
+        return
     # Convert to lowercase and split into words
     words = message.content.lower().split()
 

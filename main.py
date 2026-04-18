@@ -17,7 +17,9 @@ bot = commands.Bot('!',intents=intents)
 CENSORED_WORDS = [
     "suicide",
     "blood"  ,
-    "gey"    
+    "gey"    ,
+    "King"   ,
+    "king"
 ]
 secret_role = "Legendary Yapper"
 

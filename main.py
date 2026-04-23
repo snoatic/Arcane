@@ -46,13 +46,13 @@ async def reminder_msg():
                 )
             
 # Msg 0 mins before reset.
-@tasks.loop(time=time(hour=13,minute=0,tzinfo=timezone.utc))
-async def reminder_msg():
+@tasks.loop(time=time(hour=14,minute=0,tzinfo=timezone.utc))
+async def alert_msg():
     for channel_id in ALLOWED_CHANNEL:
         channel =bot.get_channel(channel_id)
         if channel:
             await channel.send(
-                "[Alert][!] Magic Rush Server has been reset[dot]\n"
+                "[test-Alert][!] Magic Rush Server has been reset[dot]\n"
                 "This is a system generated massage -> no need to verify!"
                 )            
 

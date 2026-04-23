@@ -1,8 +1,10 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import logging
 from dotenv import load_dotenv
 import os
+from datetime import time, timezone
+import string
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -15,7 +17,7 @@ bot = commands.Bot('!',intents=intents)
 
 # List of censored words
 ALLOWED_GUILDS = [1475164149511356617]
-
+ALLOWED_CHANNEL =[1475175998046732371,1494225508941037681]
 CENSORED_WORDS =[ "king",
                   "pregneet",
                   "Praneet",
@@ -31,7 +33,29 @@ async def on_ready():
 async def on_member_join(member):
     await member.send(f"Welcome to the server {member.name}")
 
-import string
+
+# Msg 5 mins before reset.
+@tasks.loop(time=time(hour=12,minute=55,tzinfo=timezone.utc))
+async def reminder_msg():
+    for channel_id in ALLOWED_CHANNEL:
+        channel =bot.get_channel(channel_id)
+        if channel:
+            await channel.send(
+                "[Remainder][!] Magic Rush Server is scheduling to reset in 5 minuate(s)[dot]\n"
+                "This is a system generated massage -> no need to verify!"
+                )
+            
+# Msg 0 mins before reset.
+@tasks.loop(time=time(hour=13,minute=0,tzinfo=timezone.utc))
+async def reminder_msg():
+    for channel_id in ALLOWED_CHANNEL:
+        channel =bot.get_channel(channel_id)
+        if channel:
+            await channel.send(
+                "[Alert][!] Magic Rush Server has been reset[dot]\n"
+                "This is a system generated massage -> no need to verify!"
+                )            
+
 
 @bot.event
 async def on_message(message):

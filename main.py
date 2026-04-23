@@ -28,6 +28,8 @@ secret_role = "Legendary Yapper"
 @bot.event
 async def on_ready():
     print(f"we are ready to go in, {bot.user.name}")
+    reminder_msg.start()
+    alert_msg.start()
 
 @bot.event
 async def on_member_join(member):
@@ -46,7 +48,7 @@ async def reminder_msg():
                 )
             
 # Msg 0 mins before reset.
-@tasks.loop(time=time(hour=13,minute=15,tzinfo=timezone.utc))
+@tasks.loop(time=time(hour=13,minute=25,tzinfo=timezone.utc))
 async def alert_msg():
     for channel_id in ALLOWED_CHANNEL:
         channel =bot.get_channel(channel_id)

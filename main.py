@@ -46,7 +46,7 @@ async def reminder_msg():
                 )
             
 # Msg 0 mins before reset.
-@tasks.loop(time=time(hour=14,minute=0,tzinfo=timezone.utc))
+@tasks.loop(time=time(hour=13,minute=15,tzinfo=timezone.utc))
 async def alert_msg():
     for channel_id in ALLOWED_CHANNEL:
         channel =bot.get_channel(channel_id)
